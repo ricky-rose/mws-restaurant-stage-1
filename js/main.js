@@ -160,10 +160,19 @@ createRestaurantHTML = (restaurant) => {
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  const imgurlbase = DBHelper.imageUrlForRestaurant(restaurant, "tiles");
+  const imgurl1x = imgurlbase + "_1x.jpg";
+  const imgurl2x = imgurlbase + "_2x.jpg";
+  image.src = imgurl1x;
+  image.srcset = `${imgurl1x} 300w, ${imgurl2x} 600w`;
+  image.alt = restaurant.name + "Restaurant Promo Picutre"
   li.append(image);
 
-  const name = document.createElement('h1');
+  const div = document.createElement("div");
+  div.className = "restaurant-text-area";
+  li.append(div);
+
+  const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
   li.append(name);
 
