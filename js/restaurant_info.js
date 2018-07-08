@@ -87,8 +87,13 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   address.innerHTML = restaurant.address;
 
   const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.className = 'restaurant-img'  
+  const imgurlbase = DBHelper.imageUrlForRestaurant(restaurant, "banners");
+  const imgurl1x = imgurlbase + "_1x.jpg";
+  const imgurl2x = imgurlbase + "_2x.jpg";
+  image.src = imgurl1x;
+  image.srcset = `${imgurl1x} 500w, ${imgurl2x} 800w`;
+  image.alt = restaurant.name + " Restaurant Main Picture";
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -150,6 +155,7 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
   const name = document.createElement('p');
   name.innerHTML = review.name;
+  name.className = "restaurant-review-user";
   li.appendChild(name);
 
   const date = document.createElement('p');
